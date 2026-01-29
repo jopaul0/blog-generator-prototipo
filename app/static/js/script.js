@@ -1,44 +1,60 @@
-document.getElementById('generatorForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+async function gerarArtigo() {
+    const temaInput = document.getElementById('input-tema');
+    const btn = document.getElementById('btn-gerar');
+    const display = document.getElementById('resultado-artigo');
+    
+    if (!temaInput.value) {
+        alert("Por favor, digite um tema.");
+        return;
+    }
 
-    const loading = document.getElementById('loading');
-    const resultado = document.getElementById('resultado');
-    const btn = document.getElementById('btnGerar');
-    const formData = new FormData(e.target);
-
-    // Preparar UI
-    loading.style.display = 'block';
-    resultado.style.display = 'none';
+    // Estado de carregamento
     btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Gerando...';
+    display.style.display = 'none';
 
     try {
         const response = await fetch('/generate', {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tema: temaInput.value })
         });
 
         const data = await response.json();
 
-        // Popular Ficha Técnica
-        document.getElementById('fichaTecnica').innerHTML = `
-            <div class="col-md-6 mb-2"><strong>Título:</strong> ${data.titulo}</div>
-            <div class="col-md-6 mb-2"><strong>Título SEO:</strong> ${data.titulo_seo}</div>
-            <div class="col-md-6 mb-2"><strong>Meta Descrição:</strong> ${data.meta_descricao}</div>
-            <div class="col-md-6 mb-2"><strong>Palavra Foco:</strong> ${data.palavra_foco}</div>
-            <div class="col-md-6 mb-2"><strong>Palavras-Chave:</strong> ${data.keywords}</div>
-            <div class="col-md-6 mb-2"><strong>URL:</strong> /${data.url}</div>
-            <div class="col-md-12"><strong>Tags:</strong> ${data.tags}</div>
-        `;
+        if (data.error) {
+            throw new Error(data.error);
+        }
 
-        // Popular Artigo
-        document.getElementById('conteudoArtigo').innerHTML = data.artigo;
+        document.getElementById('seo-title').innerText = data.titulo_seo;
+        document.getElementById('seo-desc').innerText = data.meta_descricao;
+        document.getElementById('seo-url').innerText = data.url_slug;
+        document.getElementById('seo-foco').innerText = data.palavra_foco;
 
-        resultado.style.display = 'block';
+        const tagsContainer = document.getElementById('seo-tags');
+        tagsContainer.innerHTML = '';
+        data.tags.split(',').forEach(tag => {
+            tagsContainer.innerHTML += `<span class="badge bg-secondary seo-badge">${tag.trim()}</span>`;
+        });
+
+        document.getElementById('artigo-titulo').innerText = data.titulo_h1;
+        document.getElementById('artigo-resumo').innerText = data.resumo;
+
+        let conteudoFormatado = data.conteudo_artigo.replace(
+            /\[IMAGEM (\d+)\]/g, 
+            '<div class="placeholder-img">📸 Placeholder para Imagem $1</div>'
+        );
+        
+        document.getElementById('artigo-corpo').innerHTML = conteudoFormatado;
+
+        display.style.display = 'block';
+        display.scrollIntoView({ behavior: 'smooth' });
+
     } catch (error) {
-        alert('Erro na geração. Verifique o console ou o container Docker.');
-        console.error(error);
+        console.error("Erro:", error);
+        alert("Ocorreu um erro ao gerar o artigo. Verifique o console.");
     } finally {
-        loading.style.display = 'none';
         btn.disabled = false;
+        btn.innerText = "Gerar Conteúdo";
     }
-});
+}

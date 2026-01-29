@@ -3,106 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Artigos</title>
-
+    <title>Gerador de Conteúdo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-
     <style>
+        :root {
+            --onvale-red: #e63946;
+            --onvale-black: #1a1a1a;
+            --onvale-white: #ffffff;
+        }
+
         body {
             background-color: #f8f9fa;
+            color: var(--onvale-black);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        .card {
-            border: none;
-            shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        .content-text {
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            font-size: 1.1rem;
         }
 
-        #loading {
-            display: none;
+        .content-text p { margin-bottom: 1.5rem; }
+
+        .btn-primary {
+            background-color: var(--onvale-red);
+            border-color: var(--onvale-red);
         }
+        .btn-primary:hover {
+            background-color: var(--onvale-black);
+            border-color: var(--onvale-black);
+        }
+
+        .card-header-onvale {
+            background-color: var(--onvale-black);
+            color: var(--onvale-white);
+            border-bottom: 3px solid var(--onvale-red);
+        }
+
+        .seo-card { border-left: 5px solid var(--onvale-red); }
+
+        #artigo-corpo table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border: 1px solid #ddd;
+        }
+
+        #artigo-corpo th {
+            background-color: var(--onvale-black);
+            color: white;
+            padding: 12px;
+        }
+
+        #artigo-corpo td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .placeholder-img {
+            background: #fdfdfd;
+            border: 2px dashed var(--onvale-red);
+            padding: 40px;
+            text-align: center;
+            margin: 30px 0;
+            color: var(--onvale-black);
+            font-weight: bold;
+        }
+
+        code { color: var(--onvale-red); }
+        .badge-red { background-color: var(--onvale-red); color: white; }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark mb-5">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">Blog <span style="color: var(--onvale-red);">Generator</span></span>
+        </div>
+    </nav>
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <h2 class="mb-4 text-center">Gerador de Artigos Blog</h2>
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
 
-            <div class="card p-4 mb-4">
-                <form id="generatorForm">
-                    <div class="row g-3">
-                        <div class="col-md-12">
-                            <label class="form-label font-weight-bold">Tema e Detalhes</label>
-                            <textarea name="tema" class="form-control" rows="4"
-                                      placeholder="Descreva o tema, adicione links ou especificações..."
-                                      required></textarea>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">Mín. Palavras</label>
-                            <input type="number" name="min_palavras" class="form-control" value="800">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">Idioma</label>
-                            <select name="idioma" class="form-select">
-                                <option value="Português">Português</option>
-                                <option value="Inglês">Inglês</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">Qtd. Imagens</label>
-                            <input type="number" name="qtd_imagens" class="form-control" value="1">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">Qtd. Tabelas</label>
-                            <input type="number" name="qtd_tabelas" class="form-control" value="0">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label">Max. Título SEO (carac)</label>
-                            <input type="number" name="max_seo_title" class="form-control" value="60">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label">Max. Meta Desc (carac)</label>
-                            <input type="number" name="max_meta" class="form-control" value="160">
-                        </div>
-                    </div>
-
-                    <button type="submit" id="btnGerar" class="btn btn-primary w-100 mt-4 py-2 font-weight-bold">
-                        Gerar Artigo Assíncrono
-                    </button>
-                </form>
-            </div>
-
-            <div id="loading" class="text-center my-4">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-2 text-muted">Aguarde, a IA está processando seu conteúdo...</p>
-            </div>
-
-            <div id="resultado" style="display: none;">
-                <div class="card border-primary mb-4">
-                    <div class="card-header bg-primary text-white font-weight-bold">📋 Ficha Técnica SEO</div>
-                    <div class="card-body bg-light">
-                        <div id="fichaTecnica" class="row small">
+                <div class="card shadow-sm mb-5 border-0">
+                    <div class="card-body p-4">
+                        <h4 class="mb-4">O que vamos escrever hoje?</h4>
+                        <div class="input-group input-group-lg">
+                            <input type="text" id="input-tema" class="form-control" placeholder="Ex: Guia do MEI para 2026">
+                            <button class="btn btn-primary px-4" type="button" id="btn-gerar" onclick="gerarArtigo()">Gerar Artigo</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="card p-4 shadow-sm">
-                    <div id="conteudoArtigo">
+                <div id="resultado-artigo" style="display:none;">
+
+                    <div class="card mb-5 seo-card shadow-sm">
+                        <div class="card-header card-header-onvale">
+                            <h5 class="mb-0">Ficha Técnica & SEO (RankMath)</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <div class="col-md-7">
+                                    <p class="mb-1"><strong>Título SEO:</strong></p>
+                                    <p id="seo-title" class="text-muted"></p>
+                                    <p class="mb-1"><strong>Slug URL:</strong></p>
+                                    <code id="seo-url"></code>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="mb-1"><strong>Palavra-Foco:</strong></p>
+                                    <span id="seo-foco" class="badge badge-red mb-3"></span>
+                                    <p class="mb-1"><strong>Meta Descrição:</strong></p>
+                                    <small id="seo-desc" class="text-muted d-block"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow border-0">
+                        <div class="card-body p-5">
+                            <h1 id="artigo-titulo" class="display-5 fw-bold mb-3" style="color: var(--onvale-black);"></h1>
+                            <p id="artigo-resumo" class="lead text-secondary mb-5 font-italic"></p>
+
+                            <div id="artigo-corpo" class="content-text">
+                                </div>
+
+                            <div class="mt-5 pt-4 border-top">
+                                <h6>Tags Sugeridas:</h6>
+                                <div id="seo-tags"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
 
-<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
