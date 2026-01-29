@@ -127,9 +127,9 @@ BlogGenerator/
 ## Autor
 
 Desenvolvido por **João Paulo Santos**
-- **LinkedIn**: [João Paulo Santos](seu-link-linkedin)
-- **Email**: seu-email@exemplo.com
-- **GitHub**: [@seu-usuario](https://github.com/seu-usuario)
+- **LinkedIn**: [João Paulo Santos](https://www.linkedin.com/in/joaosantos02/)
+- **Email**: [jopaulo.as8@gmail.com](mailto:jopaulo.as8@gmail.com)
+- **GitHub**: [@seu-usuario](https://github.com/jopaul0)
 
 ---
 
