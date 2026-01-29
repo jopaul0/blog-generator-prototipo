@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 
 # FLASK SETTINGS
@@ -8,8 +8,8 @@ api_key = os.environ.get('GOOGLE_API_KEY')
 
 # ROUTES
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Container Funcionandoo!'
+def index():
+    return render_template("index.html")
 
 # RUN
 if __name__ == '__main__':
