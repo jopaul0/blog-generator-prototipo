@@ -15,7 +15,7 @@ Este projeto está **em desenvolvimento**. É uma ferramenta interna criada para
 
 Confira o vídeo demonstrando a primeira versão funcional do gerador:
 
-🔗 **[Assista ao vídeo no Google Drive](seu-link-aqui)**
+🔗 **[Assista ao vídeo no Google Drive](https://drive.google.com/file/d/1NzJu_V3RGttPnpC9rdIzfXuDaRsY2qLn/view?usp=sharing)**
 
 ---
 
