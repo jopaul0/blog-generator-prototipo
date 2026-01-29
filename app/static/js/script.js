@@ -12,7 +12,7 @@ document.getElementById('generatorForm').addEventListener('submit', async (e) =>
     btn.disabled = true;
 
     try {
-        const response = await fetch('/gerar', {
+        const response = await fetch('/generate', {
             method: 'POST',
             body: formData
         });
