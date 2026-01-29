@@ -1,1 +1,1 @@
-from gemini import *
+from app.services.gemini import generate_content
