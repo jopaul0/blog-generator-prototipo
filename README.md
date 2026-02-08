@@ -1,139 +1,70 @@
 # Blog Generator
 
-> Gerador de conteúdo automatizado com IA para o blogs contábeis
+> Protótipo de gerador de conteúdo com IA para blogs contábeis
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/status-protótipo-orange)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![Flask](https://img.shields.io/badge/flask-latest-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
 
-## Status do Projeto
+## 📌 Sobre o Projeto
 
-Este projeto está **em desenvolvimento**. É uma ferramenta interna criada para agilizar a criação de conteúdo técnico contábil, garantindo otimização SEO e estrutura de metadados consistente.
+**Este é um protótipo desenvolvido como demonstração**. O projeto não está mais em desenvolvimento ativo e foi criado para validar a viabilidade de automatizar a geração de conteúdo contábil otimizado para SEO.
 
-## Demonstração
+O Blog Generator utiliza IA (Google Gemini) para transformar temas contábeis em artigos formatados seguindo diretrizes do RankMath, com persona especializada em contabilidade brasileira.
 
-Confira o vídeo demonstrando a primeira versão funcional do gerador:
+## 🎥 Demonstração
 
-🔗 **[Assista ao vídeo no Google Drive](https://drive.google.com/file/d/1NzJu_V3RGttPnpC9rdIzfXuDaRsY2qLn/view?usp=sharing)**
-
----
-
-## Sobre o Projeto
-
-O Blog Generator é uma solução automatizada que transforma temas contábeis complexos em artigos otimizados para SEO. Utilizando Inteligência Artificial (Google Gemini), o sistema gera conteúdo seguindo as diretrizes do RankMath.
-
-### Funcionalidades Principais
-
-- **Persona Senior**: Modelo configurado como redator especializado em contabilidade brasileira
-- **Otimização SEO (RankMath)**:
-  - Geração automática de Título SEO (máx. 60 caracteres)
-  - Meta Descrição otimizada (máx. 160 caracteres)
-  - Criação de URL amigável (slug)
-  - Posicionamento estratégico da palavra-chave nos primeiros 10% do texto
-- **Formatação Rica**: Tabelas em HTML com CSS inline e placeholders para imagens
-- **Interface**: UI responsiva estilizada em Vermelho, Preto e Branco com foco em legibilidade
+🔗 **[Assista ao vídeo da demonstração](https://drive.google.com/file/d/1NzJu_V3RGttPnpC9rdIzfXuDaRsY2qLn/view?usp=sharing)**
 
 ---
 
-## Tecnologias Utilizadas
+## ⚙️ Principais Funcionalidades
 
-| Categoria | Tecnologia                              |
-|-----------|-----------------------------------------|
-| **Backend** | Flask (Python 3.11+)                    |
-| **IA** | Google Generative AI (Gemini 2.5 Flash) |
-| **Frontend** | HTML5, CSS3, JavaScript Vanilla         |
-| **CSS Framework** | Bootstrap 5                             |
-| **Containerização** | Docker & Docker Compose                 |
+- Geração automática de Título SEO, Meta Descrição e URL amigável
+- Posicionamento estratégico de palavra-chave (primeiros 10%)
+- Formatação rica com tabelas HTML e placeholders para imagens
+- Interface responsiva em Vermelho, Preto e Branco
 
----
+## 🛠️ Tecnologias
 
-## Como Executar o Projeto
+- **Backend**: Flask (Python 3.11+)
+- **IA**: Google Generative AI (Gemini 2.5 Flash)
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
+- **Deploy**: Docker & Docker Compose
+
+## 🚀 Como Executar
 
 ### Pré-requisitos
-
-- Docker e Docker Compose instalados
+- Docker e Docker Compose
 - Chave de API do Google Gemini
-- Git
 
-### Passo a Passo
-
-1. **Clone o repositório**
-
+### Execução
 ```bash
+# Clone o repositório
 git clone https://github.com/jopaul0/BlogGenerator.git
 cd BlogGenerator
-```
 
-2. **Configure as variáveis de ambiente**
+# Configure o .env com suas chaves
+cp .env.example .env
 
-Crie um arquivo `.env` na raiz do projeto:
-
-```env
-FLASK_ENV=development
-FLASK_DEBUG=1
-SECRET_KEY=sua_chave_aqui
-GOOGLE_API_KEY=sua_chave_aqui
-```
-
-3. **Execute com Docker**
-
-```bash
+# Execute com Docker
 docker-compose up --build
+
+# Acesse: http://localhost:5000
 ```
-
-4. **Acesse a aplicação**
-
-Abra seu navegador e acesse: `http://localhost:5000`
-
-## 📁 Estrutura de Arquivos
-
-```
-BlogGenerator/
-├── app/
-│   ├── config/
-│   │   └── prompt_config.json
-│   │   └── gemini_config.json
-│   ├── services/
-│   │   └── gemini.py             
-│   └── static/
-│       └── js/
-│           └── script.js   
-├── docker-compose.yml
-├── Dockerfile
-├── requirements.txt
-├── .env.example
-└── README.md
-```
-
-### Arquivos Principais
-
-- **`/app/config/prompt_config.json`**: Define a "alma" do redator e as regras de SEO
-- **`/app/services/gemini.py`**: Integração com o novo SDK `google-genai`
-- **`/app/static/js/script.js`**: Processa o JSON da IA e renderiza o conteúdo na tela
 
 ---
 
-## Roadmap
+## 👤 Autor
 
-- [ ] Implementar botão de "Copiar para o Clipboard"
-- [ ] Adicionar exportação direta para WordPress via API
-- [ ] Criar histórico de artigos gerados
-- [ ] Sistema de templates personalizados
-- [ ] Integração com banco de dados para armazenamento
+**João Paulo Santos**
 
----
-
-## Autor
-
-Desenvolvido por **João Paulo Santos**
-- **LinkedIn**: [João Paulo Santos](https://www.linkedin.com/in/joaosantos02/)
-- **Email**: [jopaulo.as8@gmail.com](mailto:jopaulo.as8@gmail.com)
-- **GitHub**: [@jopaul0](https://github.com/jopaul0)
+- LinkedIn: [João Paulo Santos](https://www.linkedin.com/in/joaosantos02/)
+- Email: jopaulo.as8@gmail.com
+- GitHub: [@jopaul0](https://github.com/jopaul0)
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
+MIT License
