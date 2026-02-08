@@ -6,26 +6,26 @@
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![Flask](https://img.shields.io/badge/flask-latest-green)
 
-## 📌 Sobre o Projeto
+## Sobre o Projeto
 
 **Este é um protótipo desenvolvido como demonstração**. O projeto não está mais em desenvolvimento ativo e foi criado para validar a viabilidade de automatizar a geração de conteúdo contábil otimizado para SEO.
 
 O Blog Generator utiliza IA (Google Gemini) para transformar temas contábeis em artigos formatados seguindo diretrizes do RankMath, com persona especializada em contabilidade brasileira.
 
-## 🎥 Demonstração
+## Demonstração
 
 🔗 **[Assista ao vídeo da demonstração](https://drive.google.com/file/d/1NzJu_V3RGttPnpC9rdIzfXuDaRsY2qLn/view?usp=sharing)**
 
 ---
 
-## ⚙️ Principais Funcionalidades
+## Principais Funcionalidades
 
 - Geração automática de Título SEO, Meta Descrição e URL amigável
 - Posicionamento estratégico de palavra-chave (primeiros 10%)
 - Formatação rica com tabelas HTML e placeholders para imagens
 - Interface responsiva em Vermelho, Preto e Branco
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **Backend**: Flask (Python 3.11+)
 - **IA**: Google Generative AI (Gemini 2.5 Flash)
@@ -34,7 +34,7 @@ O Blog Generator utiliza IA (Google Gemini) para transformar temas contábeis em
 
 ---
 
-## 👤 Autor
+## Autor
 
 **João Paulo Santos**
 
